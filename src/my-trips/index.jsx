@@ -20,7 +20,7 @@ function MyTrips() {
         setLoading(true);
         setError(null);
         const user = JSON.parse(localStorage.getItem('user'));
-        
+
         if (!user) {
             navigate('/');
             return;
@@ -46,14 +46,18 @@ function MyTrips() {
     if (error) return <div className="text-center text-red-500">{error}</div>;
 
     return (
-        <div className='container mx-auto my-12'>
-            <div className='mx-[150px]'>
+        <div className='container mx-auto my-12 px-4'>
+            <div className='mx-auto max-w-4xl'>
                 <h1 className='font-bold text-3xl mb-8'>My Trips</h1>
-                <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-                    {trips.map((trip) => (
-                        <UserTripCard key={trip.id} trip={trip} />
-                    ))}
-                </div>
+                {trips.length === 0 ? (
+                    <div className='text-center text-gray-500'>No trips created.</div>
+                ) : (
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+                        {trips.map((trip) => (
+                            <UserTripCard key={trip.id} trip={trip} />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );
